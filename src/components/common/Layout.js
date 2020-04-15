@@ -20,9 +20,8 @@ import '../../styles/app.css'
 */
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const site = config
-    const twitterUrl = config.siteTwitterHandle ? `https://twitter.com/${config.siteTwitterHandle.replace(/^@/, ``)}` : null
-    const facebookUrl = config.siteFacebookHandle ? `https://www.facebook.com/${config.siteFacebookHandle.replace(/^\//, ``)}` : null
-
+    const twitterUrl = `https://twitter.com/devflatam`
+    const facebookUrl = `https://www.facebook.com/devfla/`
     return (
     <>
         <Helmet>
@@ -39,8 +38,8 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         <div className="site-mast">
                             <div className={isHome ? `site-mast-left` : `site-mast-left-flex`}>
                                 <Link to="/">
-                                    {config.logo ?
-                                        <img className="site-logo" src={config.logo} alt={config.siteTitleMeta} />
+                                    {site.logo ?
+                                        <img className="site-logo" src={`https://devf-website.s3.amazonaws.com/static/assets/img/devf-white.png`} alt={site.title} />
                                         : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
                                     }
                                 </Link>
@@ -52,9 +51,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                                     </nav>}
                             </div>
                             <div className="site-mast-right">
-                                { config.siteTwitterHandle && <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" /></a>}
-                                { config.siteFacebookHandle && <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" /></a>}
-                                <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
+                                <Navigation data={config.navigation} navClass="site-nav-item" />
                             </div>
                         </div>
                         { isHome ?
@@ -67,7 +64,10 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             <nav className="site-nav">
                                 <div className="site-nav-left">
                                     {/* The navigation items as setup in Ghost */}
-                                    <Navigation data={config.navigation} navClass="site-nav-item" />
+                                    { config.siteTwitterHandle && <a href={ twitterUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/twitter.svg" alt="Twitter" /></a>}
+                                    { config.siteFacebookHandle && <a href={ facebookUrl } className="site-nav-item" target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/facebook.svg" alt="Facebook" /></a>}
+                                    <a className="site-nav-item" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer"><img className="site-nav-icon" src="/images/icons/rss.svg" alt="RSS Feed" /></a>
+                                   
                                 </div>
                                 <div className="site-nav-right">
                                     {/* <Link className="site-nav-button" to="/about">About</Link> */}
